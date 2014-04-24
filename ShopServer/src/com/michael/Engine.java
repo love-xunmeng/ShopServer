@@ -52,8 +52,11 @@ public class Engine implements Runnable {
 					thread.start();
 				}
 				if(message.equals("Order")){
-					
+					System.out.println("Received Order");
+					Thread thread = new Thread(new OrderRunnable(socket));
+					thread.start();
 				}
+				//in.close();
 			}
 		}catch(Exception e){
 			e.printStackTrace();

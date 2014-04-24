@@ -3,7 +3,6 @@ package com.michael;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,16 +12,9 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Iterator;
+import java.util.Date;
 import java.util.List;
 
-import javax.imageio.ImageIO;
-
-
-//import org.hibernate.Query;
-//import org.hibernate.SessionFactory;
-//import org.hibernate.cfg.Configuration;
-//import org.hibernate.classic.Session;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.json.JSONArray;
@@ -34,12 +26,6 @@ public class Server implements Runnable {
 	
 	@Override
 	public void run(){
-		//Engine engine = new Engine();
-		//Thread
-	}
-	
-	//@Override
-	public void run2(){
 		Socket socket = null;
 		try{
 			ServerSocket server = new ServerSocket(7777);
@@ -107,7 +93,7 @@ public class Server implements Runnable {
 			}
 		}catch(IOException e) {
 			e.printStackTrace();
-		}finally{
+		} finally{
 			if(null != socket){
 				try{
 					socket.close();
@@ -119,12 +105,30 @@ public class Server implements Runnable {
 	}
 	
 	public static void main(String[] args) {
-	
+		
 		Thread thread = new Thread(new Engine());
 		thread.start();
 		
 		//Thread server = new Thread(new Server());
 		//server.start();
+	}
+	
+	
+	public static void testTBOrder(){
+		Configuration conf = new Configuration().configure();
+		SessionFactory sf = conf.buildSessionFactory();
+		Session session = sf.openSession();
+		Transaction tx = session.beginTransaction();
+		TbOrder oneOrder = new TbOrder();
+		oneOrder.setCustomerId(1);
+		oneOrder.setGoodsId(2);
+		oneOrder.setQuantity(21);
+		oneOrder.setState(0);
+		oneOrder.setBookTime(new Date());
+		session.save(oneOrder);
+		tx.commit();
+		session.close();
+		sf.close();
 	}
 	
 	

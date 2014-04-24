@@ -17,10 +17,6 @@ public class CatalogRunnable implements Runnable {
 	
 	private Socket socket = null;
 	
-	private void forTestGithub(){
-		//
-	}
-	
 	public CatalogRunnable(Socket ss){
 		socket = ss;
 	}

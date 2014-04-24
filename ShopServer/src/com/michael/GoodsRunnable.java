@@ -1,8 +1,11 @@
 package com.michael;
 
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.List;
 
@@ -51,6 +54,12 @@ public class GoodsRunnable implements Runnable {
 					e.printStackTrace();
 				}
 			}
+			System.out.println("JSON data to client: " + jsonArray.toString());
+			PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), "utf-8")), true);
+			out.print(jsonArray.toString());
+			out.close();
+			session.close();
+			sf.close();
 		}
 		catch(Exception e){
 			e.printStackTrace();
