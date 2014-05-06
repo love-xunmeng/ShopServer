@@ -34,7 +34,7 @@ public class CatalogRunnable implements Runnable {
 			Query query = session.createQuery("from TbCatalog");
 			List list = query.list();
 			for(int i = 0; i < list.size(); ++i){
-				TbCatalog oneCatalog = (TbCatalog)list.get(i);
+				TbCatalog oneCatalog = (TbCatalog )list.get(i);
 				data.put(oneCatalog.getName());
 			}
 			session.close();
