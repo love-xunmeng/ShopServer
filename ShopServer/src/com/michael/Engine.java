@@ -1,24 +1,13 @@
 package com.michael;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.List;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class Engine implements Runnable {
+	
+	private ServerSocket server = null;
 	
 	public enum MessageType{
 		Catalog, Goods, Order
@@ -38,7 +27,7 @@ public class Engine implements Runnable {
 	public void run() {
 		Socket socket = null;
 		try{
-			ServerSocket server = new ServerSocket(7777);
+			server = new ServerSocket(7777);
 			while(true){
 				socket = server.accept();
 				BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "utf-8"));
@@ -56,10 +45,19 @@ public class Engine implements Runnable {
 					Thread thread = new Thread(new OrderRunnable(socket));
 					thread.start();
 				}
-				//in.close();
+				if(message.equals("Register")){
+					Thread thread = new Thread(new RegisterRunnable(socket));
+					thread.start();
+				}
 			}
 		}catch(Exception e){
 			e.printStackTrace();
+		}finally{
+			try{
+				server.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 		}
 		
 	}

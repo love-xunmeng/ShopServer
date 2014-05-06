@@ -37,7 +37,6 @@ public class OrderRunnable implements Runnable {
 			JSONArray jsonArray = new JSONArray(data);
 			for(int i = 0; i < jsonArray.length(); ++i){
 				JSONObject jsonObject = jsonArray.getJSONObject(i);
-				//int customer_id = jsonObject.getInt("customer_id");
 				int customer_id = 1;
 				int goods_id = jsonObject.getInt("goods_id");
 				int quantity = jsonObject.getInt("quantity");
