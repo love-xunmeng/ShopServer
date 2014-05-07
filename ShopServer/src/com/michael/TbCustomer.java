@@ -4,7 +4,7 @@ public class TbCustomer {
 	private Integer id;
 	private String name;
 	private String mobile_phone;
-	private String telophone;
+	private String telephone;
 	private String address;
 	private String email;
 	
@@ -32,12 +32,12 @@ public class TbCustomer {
 		this.mobile_phone = mobile_phone;
 	}
 	
-	public String getTelophone() {
-		return telophone;
+	public String getTelephone() {
+		return telephone;
 	}
 	
-	public void setTelophone(String telophone) {
-		this.telophone = telophone;
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
 	
 	public String getAddress() {

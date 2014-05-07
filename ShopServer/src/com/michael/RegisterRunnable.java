@@ -45,7 +45,7 @@ public class RegisterRunnable implements Runnable {
 			SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 			Session session = sessionFactory.openSession();
 			//Check if the mobile_phone number exists.
-			String sqlQuery = "select * from tbcustomer where mobile_phone='" + mobilePhone + "'";
+			String sqlQuery = "select id from TbCustomer where mobile_phone='" + mobilePhone + "'";
 			//for debug
 			System.out.println("Query sql: " + sqlQuery);
 			//end for debug
@@ -56,7 +56,7 @@ public class RegisterRunnable implements Runnable {
 				isRegisterSuccess = false;
 			}else{
 				Transaction transaction = session.beginTransaction();
-				transaction.begin();
+				//transaction.begin();
 				TbCustomer oneCustomer = new TbCustomer();
 				oneCustomer.setName(userName);
 				oneCustomer.setMobile_phone(mobilePhone);

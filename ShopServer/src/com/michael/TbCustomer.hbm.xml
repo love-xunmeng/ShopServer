@@ -14,8 +14,8 @@
         <property name="mobile_phone" type="java.lang.String">
             <column name="MOBILE_PHONE" />
         </property>
-        <property name="telophone" type="java.lang.String">
-            <column name="TELOPHONE" />
+        <property name="telephone" type="java.lang.String">
+            <column name="TELEPHONE" />
         </property>
         <property name="address" type="java.lang.String">
             <column name="ADDRESS" />

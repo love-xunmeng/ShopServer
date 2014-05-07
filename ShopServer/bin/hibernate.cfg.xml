@@ -12,5 +12,6 @@
     	<mapping resource="com/michael/TbCatalog.hbm.xml"/>
     	<mapping resource="com/michael/TbGoods.hbm.xml"/>
     	<mapping resource="com/michael/TbOrder.hbm.xml" />
+    	<mapping resource="com/michael/TbCustomer.hbm.xml" />
     </session-factory>
 </hibernate-configuration>
