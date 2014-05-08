@@ -49,6 +49,10 @@ public class Engine implements Runnable {
 					Thread thread = new Thread(new RegisterRunnable(socket));
 					thread.start();
 				}
+				if(message.equals("Login")){
+					Thread thread = new Thread(new LoginRunnable(socket));
+					thread.start();
+				}
 			}
 		}catch(Exception e){
 			e.printStackTrace();
