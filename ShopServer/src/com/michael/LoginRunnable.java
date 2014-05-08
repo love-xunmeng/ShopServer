@@ -32,7 +32,7 @@ public class LoginRunnable implements Runnable {
 			String data = br.readLine();
 			JSONObject jsonObject = new JSONObject(data);
 			String mobilePhone = jsonObject.getString("mobile_phone");
-			String sqlQuery = "select id, name, mobile_phone, address, email from tbcustomer where mobile_phone='" + mobilePhone + "'";
+			String sqlQuery = "select id, name, mobile_phone, address, email from TbCustomer where mobile_phone='" + mobilePhone + "'";
 			Configuration configuration = new Configuration();
 			configuration.configure();
 			ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).buildServiceRegistry();
@@ -43,6 +43,9 @@ public class LoginRunnable implements Runnable {
 			//end of debug
 			Query query = session.createQuery(sqlQuery);
 			List list = query.list();
+			//for debug
+			System.out.println("LoginRunnable::list.size()" + list.size());
+			//end of for debug
 			if(list.size() != 1){
 				this.isLoginValid = false;
 			}else{
