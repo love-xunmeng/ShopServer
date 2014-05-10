@@ -1,9 +1,11 @@
 package com.michael;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -30,10 +32,15 @@ public class GoodsRunnable implements Runnable {
 	public void run(){
 		try{
 			System.out.println("GoodsRunnable");
+			BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream(), "utf-8"));
+			String catalog_name = br.readLine();
 			Configuration conf = new Configuration().configure();
 			SessionFactory sf = conf.buildSessionFactory();
 			Session session = sf.openSession();
-			String sqlQuery = "select g.name, g.description, g.price, g.picturePath, g.id from TbCatalog c, TbGoods g where c.id=g.catalogId and c.name='Ï´·¢Ë®'";
+			String sqlQuery = "select g.name, g.description, g.price, g.picturePath, g.id from TbCatalog c, TbGoods g where c.id=g.catalogId and c.name='" + catalog_name + "'";
+			//for debug
+			System.out.println(sqlQuery);
+			//end for debug
 			Query query = session.createQuery(sqlQuery);
 			List list = query.list();
 			JSONArray jsonArray = new JSONArray();
